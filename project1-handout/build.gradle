@@ -1,0 +1,28 @@
+apply plugin: "java"
+apply plugin: "application"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile files('libs/diskmgr.jar')
+    compile files('libs/heap.jar')
+    compile files('libs/index.jar')
+    compile files('libs/parser.jar')
+    compile files('libs/query.jar')
+    compile files('libs/relop.jar')
+}
+
+//http://takeip.com/gradle-to-execute-java-class-without-modifying-build-gradle.html
+
+mainClassName = "global.Msql"
+
+run {
+    standardInput = System.in
+}
+
+task runBmTests(type:JavaExec) {
+   main = 'tests.BMTest'
+   classpath = sourceSets.main.runtimeClasspath
+}
